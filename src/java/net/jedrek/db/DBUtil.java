@@ -3,34 +3,68 @@ package net.jedrek.db;
 /**
  * Created by Jedrek on 2017/4/25.
  */
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DBUtil {
 
-    public static void getConn() throws Exception {
+    public static Connection getConn() throws SQLException {
         String user = "root";
         String passwd = "150601";
         String url = "jdbc:mysql://127.0.0.1:3306/shopping";
 
-        String sql = " select * from customer ";
-
-        Class.forName("com.mysql.jdbc.Driver");
+       // String sql = " select * from customer ";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        }catch(ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         Connection connection = DriverManager.getConnection(url, user, passwd);
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-        while(resultSet.next()) {
-            System.out.println(resultSet.getInt("id"));
-            System.out.println(resultSet.getString("customer_name"));
-            System.out.println(resultSet.getString("customer_password"));
-            System.out.println(resultSet.getString("phone_number"));
-            System.out.println(resultSet.getString("realName"));
+        return connection;
+    }
+
+
+    public static void allClose(PreparedStatement pstmt, ResultSet rs, Connection conn)
+                                                                    throws SQLException{
+        if(pstmt != null) {
+            pstmt.close();
+        }
+        if(rs != null) {
+            rs.close();
+        }
+        if(conn != null) {
+            conn.close();
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        getConn();
+    /*
+     * 关闭增、删、改资源。
+     */
+    public static void close(PreparedStatement pstmt,Connection conn) throws SQLException {
+        if(pstmt != null) {
+            pstmt.close();
+        }
+        if(conn != null) {
+            conn.close();
+        }
     }
+
+    public static void close(PreparedStatement pstmtOrder, PreparedStatement pstmtCommodity,
+                             Connection conn) throws SQLException {
+
+        if(pstmtOrder != null) {
+            pstmtOrder.close();
+        }
+        if(pstmtCommodity != null) {
+            pstmtCommodity.close();
+        }
+        if(conn != null) {
+            conn.close();
+        }
+
+
+    }
+
+
+
 }
+

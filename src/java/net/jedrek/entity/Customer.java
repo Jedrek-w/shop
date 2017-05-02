@@ -4,6 +4,31 @@ package net.jedrek.entity;
  * Created by Jedrek on 2017/4/25.
  */
 public class Customer {
+    private String account;
+    private String name;
+    private String password;
+    private String phone;
+    private String address;
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "account='" + account + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
     public String getName() {
         return name;
     }
@@ -20,20 +45,12 @@ public class Customer {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
@@ -43,20 +60,4 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    public int getId() {
-
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    private int id;
-    private String name;
-    private String password;
-    private String phoneNumber;
-    private String realName;
-    private String address;
 }
